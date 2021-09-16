@@ -8,11 +8,11 @@ import (
 	"github.com/BurntSushi/xgbutil/icccm"
 	"github.com/BurntSushi/xgbutil/xevent"
 
-	"github.com/BurntSushi/wingo/event"
-	"github.com/BurntSushi/wingo/focus"
-	"github.com/BurntSushi/wingo/logger"
-	"github.com/BurntSushi/wingo/stack"
-	"github.com/BurntSushi/wingo/wm"
+	"github.com/xuanmingyi/wingo/event"
+	"github.com/xuanmingyi/wingo/focus"
+	"github.com/xuanmingyi/wingo/logger"
+	"github.com/xuanmingyi/wingo/stack"
+	"github.com/xuanmingyi/wingo/wm"
 )
 
 func (c *Client) unmanage() {

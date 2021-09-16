@@ -5,10 +5,10 @@ import (
 
 	"github.com/BurntSushi/gribble"
 
-	"github.com/BurntSushi/wingo/prompt"
-	"github.com/BurntSushi/wingo/wm"
-	"github.com/BurntSushi/wingo/workspace"
-	"github.com/BurntSushi/wingo/xclient"
+	"github.com/xuanmingyi/wingo/prompt"
+	"github.com/xuanmingyi/wingo/wm"
+	"github.com/xuanmingyi/wingo/workspace"
+	"github.com/xuanmingyi/wingo/xclient"
 )
 
 type CycleClientChoose struct{

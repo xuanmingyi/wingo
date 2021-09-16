@@ -10,7 +10,7 @@ import (
 
 	"github.com/BurntSushi/xgbutil"
 
-	"github.com/BurntSushi/wingo/logger"
+	"github.com/xuanmingyi/wingo/logger"
 )
 
 var subs subscriptions
