@@ -6,7 +6,7 @@ if [ ! $? = 0 ]; then
 fi
 
 Xephyr :11.0 -ac -screen 1600x900 \
-       -br -once -reset -terminate -zap &
+       -br -once -reset -terminate -zaphod &
 xemu=$!
 
 sleep 0.5
@@ -24,7 +24,7 @@ sleep 0.5
 xbindkeys -f ~/.xbindkeysrc
 xsetroot -solid white
 xsetroot -cursor_name left_ptr
-xmodmap /home/andrew/.Pmodmap
+#xmodmap /home/andrew/.Pmodmap
 DISPLAY=:0 xdotool key ctrl+shift 
 
 wait $wingo
