@@ -21,6 +21,7 @@ import (
 	"github.com/xuanmingyi/wingo/focus"
 	"github.com/xuanmingyi/wingo/logger"
 	"github.com/xuanmingyi/wingo/misc"
+	"github.com/xuanmingyi/wingo/wallpaper"
 	"github.com/xuanmingyi/wingo/wm"
 	"github.com/xuanmingyi/wingo/workspace"
 	"github.com/xuanmingyi/wingo/xclient"
@@ -144,6 +145,9 @@ var Env = gribble.New([]gribble.Command{
 	&Not{},
 	&And{},
 	&Or{},
+
+	&SetColorWallpaper{},
+	&SetFileWallpaper{},
 })
 
 var (
@@ -1443,5 +1447,33 @@ func (cmd ShowClientInPanels) Run() gribble.Value {
 			c.SkipPagerSet(false)
 		})
 		return nil
+	})
+}
+
+type SetColorWallpaper struct {
+	Color string `param:"1"`
+	Help  string `
+Set color wallpaper.
+`
+}
+
+func (cmd SetColorWallpaper) Run() gribble.Value {
+	return syncRun(func() gribble.Value {
+		wallpaper.SetColorWallpaper(wm.X, cmd.Color)
+		return cmd.Color
+	})
+}
+
+type SetFileWallpaper struct {
+	Filename string `param:"1"`
+	Help     string `
+Set file wallpaper.
+`
+}
+
+func (cmd SetFileWallpaper) Run() gribble.Value {
+	return syncRun(func() gribble.Value {
+		wallpaper.SetFileWallpaper(wm.X, cmd.Filename)
+		return cmd.Filename
 	})
 }

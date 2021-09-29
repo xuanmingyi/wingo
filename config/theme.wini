@@ -76,7 +76,7 @@
 $THIN_COLOR := 0x585a5d
 
 [Full]
-font := /usr/share/fonts/TTF/DejaVuSansMono-Bold.ttf
+font := ./data/jiangxizhuokai.ttf
 font_size := 16
 a_font_color := 0xffffff
 i_font_color := 0x000000
