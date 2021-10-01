@@ -9,6 +9,7 @@ require (
 	github.com/BurntSushi/xdg v0.0.0-20130804141135-e80d3446fea1
 	github.com/BurntSushi/xgb v0.0.0-20210121224620-deaf085860bc
 	github.com/BurntSushi/xgbutil v0.0.0-20190907113008-ad855c713046
+	github.com/mattn/go-sqlite3 v1.14.8
 	github.com/str1ngs/ansi v0.0.0-20140224183525-5dc1bc5ac1f5
 )
 
