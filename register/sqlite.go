@@ -5,10 +5,12 @@ import (
 	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/xuanmingyi/wingo/errno"
 )
 
 type SQliteDriver struct {
-	DB *sql.DB
+	DB    *sql.DB
+	Valid bool
 }
 
 // type:
@@ -30,9 +32,16 @@ func (d *SQliteDriver) init() {
 			return
 		}
 	}
+
+	d.Valid = true
+}
+
+func (d *SQliteDriver) IsValid() bool {
+	return d.Valid
 }
 
 func (d *SQliteDriver) Open(path string) (err error) {
+	// path: sqlite://my.db
 	d.DB, err = sql.Open("sqlite3", path[9:])
 	if err != nil {
 		return err
@@ -42,10 +51,15 @@ func (d *SQliteDriver) Open(path string) (err error) {
 }
 
 func (d *SQliteDriver) Close() {
-	d.DB.Close()
+	if d.IsValid() {
+		d.DB.Close()
+	}
 }
 
 func (d *SQliteDriver) Create(key string, value Record) (err error) {
+	if !d.IsValid() {
+		return errno.RegisterDriverNotValid
+	}
 	var type_flag int
 	stmt, err := d.DB.Prepare("INSERT INTO `register`(key, type, value) values (?, ?, ?)")
 	if err != nil {
@@ -67,6 +81,10 @@ func (d *SQliteDriver) Create(key string, value Record) (err error) {
 }
 
 func (d *SQliteDriver) Delete(key string) (err error) {
+	if !d.IsValid() {
+		return errno.RegisterDriverNotValid
+	}
+
 	stmt, err := d.DB.Prepare("DELETE FROM `register_string` WHERE `key` = ?")
 	if err != nil {
 		return err
@@ -80,6 +98,9 @@ func (d *SQliteDriver) Delete(key string) (err error) {
 }
 
 func (d *SQliteDriver) Update(key string, value Record) (err error) {
+	if !d.IsValid() {
+		return errno.RegisterDriverNotValid
+	}
 	stmt, err := d.DB.Prepare("UPDATE `register` SET `value` = ? WHERE `key` = ?")
 	if err != nil {
 		return err
@@ -92,6 +113,10 @@ func (d *SQliteDriver) Update(key string, value Record) (err error) {
 }
 
 func (d *SQliteDriver) Search(key string) (records map[string]Record, err error) {
+	if !d.IsValid() {
+		return nil, errno.RegisterDriverNotValid
+	}
+
 	records = make(map[string]Record)
 	rows, err := d.DB.Query("SELECT `key`, `type`, `value` FROM `register`")
 	if err != nil {

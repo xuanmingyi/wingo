@@ -3,6 +3,7 @@ package register
 type Driver interface {
 	Open(string) error
 	Close()
+	IsValid() bool
 
 	Create(string, Record) error
 	Update(string, Record) error

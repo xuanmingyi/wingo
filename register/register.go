@@ -20,6 +20,7 @@ func (r *Register) DefaultRecord(key string, record Record) {
 
 func (r *Register) Open(path string) {
 	var err error
+
 	if strings.HasPrefix(path, "sqlite://") {
 		r.Driver = new(SQliteDriver)
 		r.Driver.Open(path)
@@ -33,7 +34,9 @@ func (r *Register) Open(path string) {
 }
 
 func (r *Register) Close() {
-	r.Driver.Close()
+	if r.Driver.IsValid() {
+		r.Driver.Close()
+	}
 }
 
 // 获取
